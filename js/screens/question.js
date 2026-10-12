@@ -164,6 +164,11 @@ export class QuestionDialog {
         }
       }
 
+      const qFooter = dialogBackdrop.querySelector('#q-footer');
+      if (qFooter) {
+        qFooter.style.display = 'none';
+      }
+
       resultArea.innerHTML = `
         ${scoreBadge}
         <div class="explanation-box">
