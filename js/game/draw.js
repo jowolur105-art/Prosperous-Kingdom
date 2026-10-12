@@ -322,13 +322,13 @@ export function drawAngel(ctx, screenX, y, angel) {
   }
 
   if (assets.loaded.dragon) {
-    const dw = 120;
-    const dh = 120;
+    const dw = 140;
+    const dh = 140;
     ctx.drawImage(assets.dragon, -dw / 2, -dh / 2 - 10, dw, dh);
   } else {
     ctx.fillStyle = '#10B981';
     ctx.beginPath();
-    ctx.arc(0, -20, 25, 0, Math.PI * 2);
+    ctx.arc(0, -20, 30, 0, Math.PI * 2);
     ctx.fill();
   }
 

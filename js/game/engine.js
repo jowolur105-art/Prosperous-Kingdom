@@ -157,6 +157,9 @@ export class Engine {
       if (this.angelFlyProgress >= 1) {
         this.angelFlyProgress = 0;
         this.angelState = 'none';
+        if (this.activeAngel) {
+          this.activeAngel.hasFlownAway = true;
+        }
         this.activeAngel = null;
       }
     }
@@ -200,8 +203,8 @@ export class Engine {
     const spacing = 420 + Math.random() * 360;
     this.lastSpawnX += spacing;
 
-    // 65% chance of hole/pit, 35% chance of dragon encounter
-    const spawnDragon = Math.random() > 0.65;
+    // Balanced: 50% chance dragon encounter, 50% hole
+    const spawnDragon = Math.random() > 0.50;
     if (spawnDragon) {
       this.track.angels.push({
         x: this.lastSpawnX,
@@ -263,6 +266,8 @@ export class Engine {
 
     // 4. Dragons (Naga Ekonomi)
     for (const a of this.track.angels) {
+      if (a.hasFlownAway) continue;
+
       let screenX;
       let flyProgress = 0;
 

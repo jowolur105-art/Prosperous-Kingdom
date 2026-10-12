@@ -99,8 +99,7 @@ for (let i = 0; i < TOTAL_RUNS; i++) {
   positions.sort((a, b) => a - b);
 
   for (let k = 1; k < positions.length; k++) {
-    // Note: gap can be relaxed if needed, but should never be unreasonably small
-    if (positions[k] - positions[k - 1] < 400) {
+    if (positions[k] - positions[k - 1] < GAP_MIN) {
       console.error(`[Iterasi ${i}] Jarak antarkejadian terlalu sempit: ${positions[k] - positions[k - 1]}`);
       invariantFailures++;
     }

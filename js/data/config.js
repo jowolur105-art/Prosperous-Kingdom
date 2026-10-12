@@ -56,7 +56,7 @@ export const ANGEL_ENCOUNTER_DIST = 260; // px, triggers encounter when player i
 export const ANGEL_BLOCK_DIST = 170;     // px in front of player where dragon hovers
 export const ANGEL_FLOAT_MIN = 160;      // min float height above ground
 export const ANGEL_FLOAT_MAX = 220;      // max float height above ground
-export const ANGEL_FLY_AWAY_DURATION = 0.8; // seconds
+export const ANGEL_FLY_AWAY_DURATION = 1.3; // seconds (smooth majestic ascend)
 export const ANGEL_PASTEL_COLORS = [
   '#E0C3FC', '#B5EAD7', '#FFDAC1', '#C7CEEA',
   '#FFB7B2', '#B5D8EB', '#F0E6EF', '#D4F0F0',

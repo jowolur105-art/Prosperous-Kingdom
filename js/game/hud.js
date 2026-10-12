@@ -20,14 +20,7 @@ export function drawHUD(ctx, info) {
   ctx.shadowOffsetX = 2;
   ctx.shadowOffsetY = 2;
 
-  // Pojok Kiri: Skor (polosan tanpa ikon)
-  ctx.textAlign = 'left';
-  ctx.textBaseline = 'middle';
-  ctx.fillStyle = '#FCD34D';
-  ctx.font = 'bold 26px "MedievalSharp", "Cinzel", "Segoe UI", sans-serif';
-  ctx.fillText(`Skor: ${score}`, 32, 42);
-
-  // Tengah: Soal Terjawab (polosan tanpa ikon)
+  // Tengah: Soal Terjawab
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillStyle = '#FFFFFF';

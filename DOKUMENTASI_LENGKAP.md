@@ -195,13 +195,12 @@ Fisika permainan diprogram dengan perhitungan inersia yang presisi dan responsif
 
 ### A. Tampilan Header HUD (Head-Up Display)
 Sesuai arahan desain minimalis kerajaan:
-- **Pojok Kiri Atas:** `Skor: [Nilai]` ditampilkan dengan warna emas `#FCD34D`, font medieval, dan bayangan teks tajam tanpa kotak background.
-- **Tengah Atas:** `Soal Terjawab: [X] / 20` ditampilkan dengan warna putih bersih `#FFFFFF` tanpa ikon emoji tambahan.
+- **Tengah Atas:** `Soal Terjawab: [X] / 20` ditampilkan dengan warna putih bersih `#FFFFFF` dengan bayangan teks tajam tanpa kotak background. Perhitungan skor di pojok kiri dihilangkan untuk menjaga fokus pemain pada progres penyelesaian 20 misi soal.
 
 ### B. Desain Modal Kuis (*Compact Glassmorphism*)
-- Menggunakan latar belakang semitransparan `rgba(15, 23, 42, 0.88)` dengan efek *backdrop-filter blur 16px* dan garis tepi emas kerajaan `rgba(245, 158, 11, 0.6)`.
+- Menggunakan latar belakang semitransparan `rgba(15, 23, 42, 0.90)` dengan efek *backdrop-filter blur 16px* dan garis tepi emas kerajaan `rgba(245, 158, 11, 0.6)`.
 - Dirancang kompak dan responsif sehingga **tidak memicu *scrollbar*** pada layar resolusi standar maupun laptop kelas saat kotak pembahasan muncul.
-- Header modal polosan tanpa ikon: *"Naga Ekonomi Bertanya"* atau *"Terjatuh ke Jurang Kuno"*.
+- **Naga Ekonomi Visual:** Modal pertanyaan naga menampilkan avatar sprite Naga Ekonomi (`assets/dragon.png`) dengan efek cahaya aura azure/emerald dan judul *"🐉 Naga Ekonomi Bertanya"*.
 - Waktu timer ditampilkan minimalis: `[Sisa]s`.
 
 ### C. Animasi Karakter Ksatria (*Knight Running Cycle*)

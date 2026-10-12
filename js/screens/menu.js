@@ -6,7 +6,7 @@
 import { CANVAS_W, CANVAS_H, BG_KINGDOM_ASSET } from '../data/config.js';
 import { getSettings, updateSettings, setSession } from '../store.js';
 import { isMuted, toggleMute, initAudio, playBGM } from '../audio.js';
-import { drawClouds } from '../game/draw.js';
+import { drawClouds, drawAngel } from '../game/draw.js';
 import { generateTrack } from '../track.js';
 import { QUESTIONS_MALAIKAT, QUESTIONS_JURANG } from '../data/questions.js';
 
@@ -100,8 +100,8 @@ export class MenuScreen {
       [shuffledPitQuestions[i], shuffledPitQuestions[j]] = [shuffledPitQuestions[j], shuffledPitQuestions[i]];
     }
 
-    // 3. Track
-    const track = generateTrack(4, settings.speed || 'normal');
+    // 3. Track (Balanced Dragons and Chasms)
+    const track = generateTrack(6, settings.speed || 'normal');
 
     const session = {
       kelompok: [{
@@ -147,6 +147,14 @@ export class MenuScreen {
     if (this.bgLoaded && this.bgImage) {
       ctx.drawImage(this.bgImage, 0, 0, CANVAS_W, CANVAS_H);
       drawClouds(ctx, this.animTime * 15, this.animTime);
+
+      // Majestic Guardian Dragon hovering proudly in the kingdom sky!
+      const dragonX = 990 + Math.sin(this.animTime * 1.5) * 25;
+      drawAngel(ctx, dragonX, 260, {
+        floatH: 80,
+        animTime: this.animTime,
+        flyAway: 0,
+      });
     }
   }
 

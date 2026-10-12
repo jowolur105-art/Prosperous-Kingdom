@@ -28,14 +28,23 @@ export class QuestionDialog {
     dialogBackdrop.className = 'question-backdrop';
 
     const isDragon = (type === 'angel');
-    const headerTitle = isDragon
-      ? 'Naga Ekonomi Bertanya'
-      : 'Terjatuh ke Jurang Kuno';
 
     dialogBackdrop.innerHTML = `
       <div class="question-dialog" role="dialog" aria-modal="true">
         <div class="question-header">
-          <span class="label">${headerTitle}</span>
+          <div class="header-left">
+            ${isDragon ? `
+              <div class="dragon-header-badge">
+                <img src="assets/dragon.png" alt="Naga Ekonomi" class="dragon-avatar-img">
+                <span class="label dragon-label">Naga Ekonomi Bertanya</span>
+              </div>
+            ` : `
+              <div class="pit-header-badge">
+                <span class="pit-avatar-icon">🕳️</span>
+                <span class="label pit-label">Terjatuh ke Jurang Kuno</span>
+              </div>
+            `}
+          </div>
           ${timerSec > 0 ? `<div class="question-timer" id="q-timer">${timeLeft}s</div>` : ''}
         </div>
 
