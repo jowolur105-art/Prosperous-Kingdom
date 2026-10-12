@@ -1,7 +1,7 @@
 // Service Worker — Prosperous Kingdom PWA
 // Cache-first for same-origin assets; offline navigation falls back to index.html
 
-const CACHE_NAME = 'prosperous-kingdom-v3';
+const CACHE_NAME = 'prosperous-kingdom-v4';
 
 // All static files to precache (must be complete for 100% offline)
 const PRECACHE = [

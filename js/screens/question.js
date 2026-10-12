@@ -66,7 +66,7 @@ export class QuestionDialog {
 
         <div class="question-footer" id="q-footer">
           <span class="hint">Pilih opsi atau langsung klik Kunci Jawaban</span>
-          <button class="btn btn-primary btn-sm" id="btn-lock" style="min-width:140px; min-height:40px; font-size:16px;">
+          <button class="btn-parchment" id="btn-lock">
             Kunci Jawaban
           </button>
         </div>
@@ -170,7 +170,7 @@ export class QuestionDialog {
           <strong>Pembahasan:</strong> ${question.penjelasan || ''}
         </div>
         <div style="display:flex; justify-content:flex-end; margin-top:8px;">
-          <button class="btn btn-primary" id="btn-next" style="min-width:180px; min-height:44px; font-size:18px; padding:6px 18px;">
+          <button class="btn-parchment" id="btn-next" style="min-width:170px;">
             Lanjut
           </button>
         </div>
@@ -231,7 +231,7 @@ export class QuestionDialog {
 function formatQuestionText(text) {
   if (!text) return '';
   return text
-    .replace(/\b(BUKAN)\b/g, '<strong style="color:#F59E0B">BUKAN</strong>')
-    .replace(/\b(SALAH)\b/g, '<strong style="color:#F59E0B">SALAH</strong>')
-    .replace(/\b(BENAR)\b/g, '<strong style="color:#F59E0B">BENAR</strong>');
+    .replace(/\b(BUKAN)\b/g, '<strong style="color:#9A3412; text-decoration:underline;">BUKAN</strong>')
+    .replace(/\b(SALAH)\b/g, '<strong style="color:#9A3412; text-decoration:underline;">SALAH</strong>')
+    .replace(/\b(BENAR)\b/g, '<strong style="color:#15803D; text-decoration:underline;">BENAR</strong>');
 }
