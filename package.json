@@ -1,0 +1,9 @@
+{
+  "name": "prosperous-kingdom",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Game edukasi side-scrolling PWA untuk materi Pelaku Kegiatan Ekonomi",
+  "scripts": {
+    "test": "node tests/track.test.js"
+  }
+}

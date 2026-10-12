@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0F766E">
+  <meta name="description" content="Game edukasi arcade pelaku kegiatan ekonomi untuk SMA kelas X — Prosperous Kingdom PWA offline">
+  <title>Prosperous Kingdom</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./assets/medieval-font.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/ui.css">
+</head>
+<body>
+  <button class="mute-btn" id="global-mute-btn" aria-label="Bisukan suara" title="Bisukan / Nyalakan Musik (M)">🔊</button>
+  <canvas id="game" role="img" aria-label="Area permainan Prosperous Kingdom"></canvas>
+  <div id="ui-overlay"></div>
+
+  <noscript>
+    <div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0F766E;color:#FFF;font-family:system-ui;font-size:24px;text-align:center;padding:20px;">
+      <p>Game ini memerlukan JavaScript.<br>Aktifkan JavaScript di pengaturan browser Anda.</p>
+    </div>
+  </noscript>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

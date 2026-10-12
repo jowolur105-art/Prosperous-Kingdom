@@ -1,0 +1,85 @@
+/* ===== Reset & Design Tokens ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #0F766E;
+  --primary-light: #14B8A6;
+  --primary-dark: #0D5A54;
+  --accent: #F59E0B;
+  --accent-light: #FCD34D;
+  --danger: #EF4444;
+  --danger-light: #FCA5A5;
+  --success: #22C55E;
+  --success-light: #86EFAC;
+  --bg: #BFE3F5;
+  --text: #1E293B;
+  --text-muted: #64748B;
+  --text-light: #F8FAFC;
+  --overlay-dark: rgba(0, 0, 0, 0.55);
+  --overlay-light: rgba(255, 255, 255, 0.12);
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.35);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --transition: 0.2s ease;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: var(--font);
+  color: var(--text);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ===== Canvas (centered, aspect-ratio preserved) ===== */
+#game {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  image-rendering: auto;
+}
+
+/* ===== UI Overlay (positioned to match canvas) ===== */
+#ui-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+#ui-overlay > * {
+  pointer-events: auto;
+}
+
+/* ===== Accessibility ===== */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== Scrollbar hide ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 3px; }
