@@ -1,7 +1,7 @@
 // Service Worker — Prosperous Kingdom PWA
 // Cache-first for same-origin assets; offline navigation falls back to index.html
 
-const CACHE_NAME = 'prosperous-kingdom-v2';
+const CACHE_NAME = 'prosperous-kingdom-v3';
 
 // All static files to precache (must be complete for 100% offline)
 const PRECACHE = [
@@ -50,6 +50,7 @@ const PRECACHE = [
   './assets/fonts/font_1.ttf',
   './assets/fonts/font_2.ttf',
   './assets/bgm-kingdom.mp3',
+  './assets/scroll-map.webp',
 ];
 
 // ===== Install: precache all static assets =====

@@ -12,14 +12,37 @@ let bgmVolume = 0.45;
 
 /** Get or initialize background music instance */
 export function getBgmAudio() {
-  if (!bgmAudio && typeof Audio !== 'undefined') {
-    bgmAudio = new Audio(BGM_ASSET);
-    bgmAudio.loop = true;
-    bgmAudio.volume = bgmVolume;
-    bgmAudio.muted = muted;
-    bgmAudio.preload = 'auto';
+  if (!bgmAudio) {
+    if (typeof document !== 'undefined') {
+      bgmAudio = document.getElementById('bgm-player');
+    }
+    if (!bgmAudio && typeof Audio !== 'undefined') {
+      bgmAudio = new Audio(BGM_ASSET);
+    }
+    if (bgmAudio) {
+      bgmAudio.loop = true;
+      bgmAudio.volume = bgmVolume;
+      bgmAudio.muted = muted;
+      bgmAudio.preload = 'auto';
+    }
   }
   return bgmAudio;
+}
+
+export function showAudioPrompt() {
+  if (typeof document === 'undefined') return;
+  if (document.getElementById('audio-prompt-chip')) return;
+  const chip = document.createElement('div');
+  chip.id = 'audio-prompt-chip';
+  chip.className = 'audio-prompt-chip';
+  chip.innerHTML = '⚔️ Klik di mana saja untuk menyalakan Musik Kerajaan 🎵';
+  document.body.appendChild(chip);
+}
+
+export function hideAudioPrompt() {
+  if (typeof document === 'undefined') return;
+  const chip = document.getElementById('audio-prompt-chip');
+  if (chip) chip.remove();
 }
 
 /** Play background music across screens seamlessly */
@@ -30,10 +53,14 @@ export function playBGM() {
   if (bgm.paused) {
     const playPromise = bgm.play();
     if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // Autoplay may be restricted until first user gesture
+      playPromise.then(() => {
+        hideAudioPrompt();
+      }).catch(() => {
+        showAudioPrompt();
       });
     }
+  } else {
+    hideAudioPrompt();
   }
 }
 
