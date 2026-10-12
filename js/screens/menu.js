@@ -27,6 +27,7 @@ export class MenuScreen {
   enter() {
     this._renderUI();
     this._startBackgroundLoop();
+    initAudio();
     playBGM();
   }
 

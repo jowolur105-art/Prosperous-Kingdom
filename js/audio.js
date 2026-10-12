@@ -80,6 +80,11 @@ export function setMuted(m) {
 export function isMuted() { return muted; }
 
 export function toggleMute() {
+  if (bgmAudio && bgmAudio.paused && !muted) {
+    // If not muted but paused (e.g. autoplay was waiting for interaction), start playback!
+    bgmAudio.play().catch(() => {});
+    return false;
+  }
   muted = !muted;
   if (bgmAudio) {
     bgmAudio.muted = muted;
@@ -94,18 +99,33 @@ export function toggleMute() {
 export function setVolume(v) { volume = Math.max(0, Math.min(1, v)); }
 export function getVolume() { return volume; }
 
-// Automatically trigger audio playback on the very first user interaction
+// Autoplay immediately on window load and any early user interaction
 if (typeof window !== 'undefined') {
-  const onFirstInteraction = () => {
+  const startAutoplay = () => {
     initAudio();
     playBGM();
-    window.removeEventListener('pointerdown', onFirstInteraction);
-    window.removeEventListener('keydown', onFirstInteraction);
-    window.removeEventListener('click', onFirstInteraction);
   };
-  window.addEventListener('pointerdown', onFirstInteraction, { once: true });
-  window.addEventListener('keydown', onFirstInteraction, { once: true });
-  window.addEventListener('click', onFirstInteraction, { once: true });
+
+  // Immediate attempt
+  startAutoplay();
+
+  // On page load events
+  window.addEventListener('DOMContentLoaded', startAutoplay);
+  window.addEventListener('load', startAutoplay);
+
+  // First interaction fallback (unlocks web audio if browser blocks zero-click autoplay)
+  const onFirstGesture = () => {
+    startAutoplay();
+    ['pointerdown', 'keydown', 'click', 'touchstart'].forEach(evt => {
+      window.removeEventListener(evt, onFirstGesture);
+      document.removeEventListener(evt, onFirstGesture);
+    });
+  };
+
+  ['pointerdown', 'keydown', 'click', 'touchstart'].forEach(evt => {
+    window.addEventListener(evt, onFirstGesture, { once: true, passive: true });
+    document.addEventListener(evt, onFirstGesture, { once: true, passive: true });
+  });
 }
 
 /** Play a tone with given frequency, duration, and type */

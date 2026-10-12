@@ -103,6 +103,10 @@ window.addEventListener('beforeinstallprompt', (e) => {
 
 // === Initialise on page load ===
 window.addEventListener('load', () => {
+  // Autoplay Medieval BGM immediately on window load
+  initAudio();
+  playBGM();
+
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
