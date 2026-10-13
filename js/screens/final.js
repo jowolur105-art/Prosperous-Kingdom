@@ -31,50 +31,51 @@ export class FinalScreen {
     finalContainer.style.background = 'linear-gradient(135deg, #0F172A 0%, #1E1B4B 100%)';
 
     finalContainer.innerHTML = `
-      <div style="max-width:920px; width:100%; padding:36px; background:rgba(30, 41, 59, 0.95); border:2px solid #F59E0B; border-radius:24px; box-shadow:0 16px 48px rgba(0,0,0,0.7); color:#F8FAFC; text-align:center;">
-        <div style="font-size:52px; margin-bottom:6px;">👑</div>
-        <h1 style="font-size:38px; font-weight:900; margin-bottom:6px; color:#FCD34D;">
+      <div class="final-card">
+        <div class="final-crown-icon">👑</div>
+        <h1 class="final-title">
           Papan Kejayaan Prosperous Kingdom
         </h1>
-        <p style="font-size:18px; color:#94A3B8; margin-bottom:24px;">
+        <p class="final-subtitle">
           🎉 20 Teka-Teki Ekonomi Kerajaan Berhasil Ditaklukkan!
         </p>
 
-        <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:28px; text-align:left;">
+        <div class="final-rank-list">
           ${sortedGroups.map((g, idx) => {
             const rank = idx + 1;
             const badgeIcon = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : `${rank}.`;
 
             return `
-              <div style="display:flex; align-items:center; justify-content:space-between; background:${rank === 1 ? 'rgba(245, 158, 11, 0.2)' : 'rgba(15, 23, 42, 0.7)'}; border:2px solid ${rank === 1 ? '#F59E0B' : 'rgba(255,255,255,0.1)'}; border-radius:14px; padding:14px 20px;">
-                <div style="display:flex; align-items:center; gap:14px;">
-                  <span style="font-size:28px; font-weight:800; min-width:36px; text-align:center;">
+              <div class="rank-card-row ${rank === 1 ? 'rank-card-first' : ''}">
+                <div class="rank-left-section">
+                  <span class="rank-badge-icon">
                     ${badgeIcon}
                   </span>
-                  <div style="background:${g.color}; color:#FFF; width:40px; height:40px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:20px; font-weight:bold;">
+                  <div class="group-symbol-circle" style="background:${g.color};">
                     ${g.symbol}
                   </div>
-                  <div>
-                    <div style="font-size:22px; font-weight:800; color:#FFF;">${g.name}</div>
-                    <div style="font-size:14px; color:#94A3B8;">
+                  <div class="group-info-col">
+                    <div class="group-name-text">${g.name}</div>
+                    <div class="group-stats-text">
                       Benar: ${g.correctAnswers || 0} soal &nbsp;|&nbsp; Salah: ${g.wrongAnswers || 0} soal
                     </div>
                   </div>
                 </div>
 
-                <div style="text-align:right;">
-                  <div style="font-size:28px; font-weight:900; color:#FCD34D;">${g.score} <span style="font-size:16px;">Poin</span></div>
+                <div class="rank-score-section">
+                  <span class="rank-score-num">${g.score}</span>
+                  <span class="rank-score-label">Poin</span>
                 </div>
               </div>
             `;
           }).join('')}
         </div>
 
-        <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
-          <button class="btn btn-secondary" id="btn-review-questions" style="min-height:56px; font-size:18px;">
+        <div class="final-actions-row">
+          <button class="btn btn-secondary btn-action-final" id="btn-review-questions">
             📖 Review Pembahasan Soal
           </button>
-          <button class="btn btn-primary" id="btn-new-session" style="min-height:56px; font-size:18px; background:linear-gradient(135deg, #F59E0B, #B45309);">
+          <button class="btn btn-primary btn-action-final" id="btn-new-session">
             🔄 Main Ekspedisi Baru
           </button>
         </div>

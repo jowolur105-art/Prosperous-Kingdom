@@ -182,7 +182,12 @@ export class QuestionDialog {
       `;
 
       const nextBtn = resultArea.querySelector('#btn-next');
-      nextBtn.focus();
+      if (nextBtn) {
+        nextBtn.focus();
+        setTimeout(() => {
+          nextBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 60);
+      }
 
       function finish() {
         window.removeEventListener('keydown', handleKey);

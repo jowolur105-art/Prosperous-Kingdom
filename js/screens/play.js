@@ -52,6 +52,9 @@ export class PlayScreen {
     this.engine.initRun(this.track, this.currentGroup, settings.speed || 'normal', this.session.answeredCount);
     this.engine.start();
 
+    // Render on-screen mobile controls
+    this._renderMobileControls();
+
     // Teacher Panel shortcut (T)
     this._onKeyDown = (e) => {
       if (e.code === 'KeyT') {
@@ -59,6 +62,20 @@ export class PlayScreen {
       }
     };
     window.addEventListener('keydown', this._onKeyDown);
+  }
+
+  _renderMobileControls() {
+    const controlsContainer = document.createElement('div');
+    controlsContainer.className = 'gameplay-touch-controls';
+    controlsContainer.id = 'gameplay-controls';
+    controlsContainer.innerHTML = `
+      <div class="tap-hint-pill">Ketuk layar / tombol untuk melompat</div>
+      <button class="mobile-jump-btn" id="mobile-jump-btn" aria-label="Tombol Melompat">
+        <span class="jump-icon">🛡️</span>
+        <span class="jump-text">LOMPAT</span>
+      </button>
+    `;
+    this.overlay.appendChild(controlsContainer);
   }
 
   exit() {

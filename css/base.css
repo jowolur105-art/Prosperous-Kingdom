@@ -33,12 +33,15 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #000;
+  background: #080C14;
   font-family: var(--font);
   color: var(--text);
   -webkit-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  margin: 0;
+  padding: 0;
 }
 
 /* ===== Canvas (centered, aspect-ratio preserved) ===== */
@@ -51,11 +54,12 @@ html, body {
   image-rendering: auto;
 }
 
-/* ===== UI Overlay (positioned to match canvas) ===== */
+/* ===== UI Overlay (full-viewport overlay for responsive dialogs and screens) ===== */
 #ui-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   z-index: 10;
   overflow: hidden;

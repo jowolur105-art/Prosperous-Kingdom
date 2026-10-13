@@ -320,13 +320,13 @@ export class Engine {
 
   _attachInputs() {
     window.addEventListener('keydown', this._handleKeyDown);
-    this.canvas.addEventListener('pointerdown', this._handlePointerDown);
+    window.addEventListener('pointerdown', this._handlePointerDown);
     document.addEventListener('visibilitychange', this._handleVisibilityChange);
   }
 
   _detachInputs() {
     window.removeEventListener('keydown', this._handleKeyDown);
-    this.canvas.removeEventListener('pointerdown', this._handlePointerDown);
+    window.removeEventListener('pointerdown', this._handlePointerDown);
     document.removeEventListener('visibilitychange', this._handleVisibilityChange);
   }
 
@@ -339,8 +339,25 @@ export class Engine {
     }
   }
 
-  _handlePointerDown() {
-    if (this.player) this.player.requestJump();
+  _handlePointerDown(e) {
+    // Ignore clicks if clicking inside UI buttons, links, or modals (except our jump button)
+    if (e && e.target) {
+      if (e.target.closest('#global-mute-btn') ||
+          e.target.closest('.question-backdrop') ||
+          e.target.closest('.teacher-panel') ||
+          e.target.closest('select') ||
+          e.target.closest('input') ||
+          (e.target.closest('button') && !e.target.closest('#mobile-jump-btn'))) {
+        return;
+      }
+    }
+
+    if (this.player) {
+      this.player.requestJump();
+      if (navigator.vibrate) {
+        try { navigator.vibrate(15); } catch (_) {}
+      }
+    }
   }
 
   _handleVisibilityChange() {

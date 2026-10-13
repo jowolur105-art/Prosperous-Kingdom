@@ -41,17 +41,29 @@ function resizeCanvas() {
   canvas.height = Math.floor(CANVAS_H * dpr);
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-  // Position UI overlay to match canvas exactly
+  // Computed offsets
   const offsetX = Math.floor((winW - displayW) / 2);
   const offsetY = Math.floor((winH - displayH) / 2);
-  overlay.style.width = `${displayW}px`;
-  overlay.style.height = `${displayH}px`;
-  overlay.style.left = `${offsetX}px`;
-  overlay.style.top = `${offsetY}px`;
 
   canvas._scale = scale;
   canvas._offsetX = offsetX;
   canvas._offsetY = offsetY;
+
+  // Set CSS custom properties on document root so UI elements can adapt fluidly
+  const root = document.documentElement;
+  root.style.setProperty('--canvas-width', `${displayW}px`);
+  root.style.setProperty('--canvas-height', `${displayH}px`);
+  root.style.setProperty('--canvas-left', `${offsetX}px`);
+  root.style.setProperty('--canvas-top', `${offsetY}px`);
+  root.style.setProperty('--canvas-scale', `${scale}`);
+  root.style.setProperty('--viewport-w', `${winW}px`);
+  root.style.setProperty('--viewport-h', `${winH}px`);
+
+  // UI overlay covers the entire viewport so modals and menus never get cut off
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.left = '0px';
+  overlay.style.top = '0px';
 
   // Re-render current screen if it provides a render method
   if (window._router && window._router.currentScreen && window._router.currentScreen.render) {
@@ -109,6 +121,12 @@ window.addEventListener('load', () => {
 
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
+  window.addEventListener('orientationchange', () => {
+    setTimeout(resizeCanvas, 150);
+  });
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', resizeCanvas);
+  }
 
   // Register Service Worker
   registerSW();

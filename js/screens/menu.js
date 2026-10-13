@@ -43,23 +43,34 @@ export class MenuScreen {
     this.overlay.innerHTML = '';
 
     const homeContainer = document.createElement('div');
-    homeContainer.className = 'screen-overlay';
+    homeContainer.className = 'screen-overlay home-screen-container';
+
+    // Show orientation helper banner on mobile portrait if not dismissed
+    const isPortraitMobile = window.innerWidth < 800 && window.innerHeight > window.innerWidth;
+    const hideNotice = sessionStorage.getItem('hide_rotate_tip') === '1';
 
     homeContainer.innerHTML = `
+      ${isPortraitMobile && !hideNotice ? `
+        <div class="orientation-banner" id="orientation-banner">
+          <span>📱 Putar layar ke <strong>Lanskap</strong> untuk tampilan lintasan terbaik 🔄</span>
+          <button class="banner-close-btn" id="btn-close-orientation" aria-label="Tutup pesan">✕</button>
+        </div>
+      ` : ''}
+
       <div class="home-overlay"></div>
 
       <div class="home-content">
-        <h1 class="home-title" style="font-family:'Cinzel', 'MedievalSharp', serif; font-size:78px; letter-spacing:4px; color:#FCD34D; text-shadow:0 4px 16px rgba(0,0,0,0.8), 0 0 35px rgba(245,158,11,0.7); margin-top:14%;">
+        <h1 class="home-title">
           Prosperous Kingdom
         </h1>
 
-        <div class="home-actions" style="margin-top:auto; margin-bottom:12%;">
-          <button class="btn btn-primary" id="btn-play" style="font-family:'MedievalSharp', 'Cinzel', serif; font-size:38px; min-width:280px; min-height:80px; letter-spacing:3px; background:linear-gradient(135deg, #F59E0B 0%, #B45309 100%); border:3px solid #FCD34D; box-shadow:0 8px 32px rgba(0,0,0,0.6); cursor:pointer;">
+        <div class="home-actions">
+          <button class="btn btn-primary btn-pulse btn-play-pulse" id="btn-play">
             PLAY
           </button>
 
-          <div style="margin-top:14px;">
-            <button class="btn btn-secondary btn-sm" id="btn-settings" style="font-family:'MedievalSharp', serif; font-size:16px;">
+          <div class="home-secondary-row">
+            <button class="btn btn-secondary btn-sm" id="btn-settings">
               ⚙ Pengaturan
             </button>
           </div>
@@ -69,11 +80,27 @@ export class MenuScreen {
 
     this.overlay.appendChild(homeContainer);
 
-    // DIRECT PLAY: Start gameplay immediately on click, no rules/setup screen
+    // Orientation banner close button
+    const closeBannerBtn = homeContainer.querySelector('#btn-close-orientation');
+    if (closeBannerBtn) {
+      closeBannerBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        sessionStorage.setItem('hide_rotate_tip', '1');
+        const banner = homeContainer.querySelector('#orientation-banner');
+        if (banner) banner.remove();
+      });
+    }
+
+    // DIRECT PLAY: Start gameplay immediately on click, try fullscreen/landscape on mobile
     const playBtn = homeContainer.querySelector('#btn-play');
     playBtn.addEventListener('click', () => {
       initAudio();
       playBGM();
+      try {
+        if (window.innerWidth <= 1024 && screen.orientation && screen.orientation.lock) {
+          screen.orientation.lock('landscape').catch(() => {});
+        }
+      } catch (err) {}
       this._startDirectGame();
     });
 

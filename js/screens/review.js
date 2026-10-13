@@ -60,17 +60,17 @@ export class ReviewScreen {
     reviewContainer.style.color = 'var(--text)';
 
     reviewContainer.innerHTML = `
-      <div style="max-width:960px; width:100%; padding-bottom:40px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
-          <div>
-            <h1 style="font-size:36px; font-weight:900; color:var(--primary); margin:0;">
+      <div class="review-wrapper">
+        <div class="review-header">
+          <div class="review-title-col">
+            <h1 class="review-title">
               Review Pembahasan Soal
             </h1>
-            <p style="font-size:18px; color:var(--text-muted); margin-top:4px;">
+            <p class="review-subtitle">
               Diurutkan dari soal yang paling banyak dijawab salah oleh siswa
             </p>
           </div>
-          <button class="btn btn-secondary btn-sm" id="btn-back-final" style="color:var(--text); border-color:#94A3B8;">
+          <button class="btn btn-secondary btn-sm btn-back-responsive" id="btn-back-final">
             ← Kembali ke Peringkat
           </button>
         </div>
